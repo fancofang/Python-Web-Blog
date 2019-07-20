@@ -1,0 +1,600 @@
+html,body {
+    color: #777;
+    height: 100%;
+    margin: 0;
+}
+
+/*
+Add transition to containers so they can push in and out.
+*/
+#layout,
+#menu,
+.menu-link {
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -ms-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+}
+
+/*
+This is the parent `<div>` that contains the menu and the content area.
+*/
+#layout {
+    height: 100%;
+    position: relative;
+    left: 0;
+    padding-left: 0;
+}
+    #layout.active #menu {
+        left: 150px;
+        width: 150px;
+    }
+
+    #layout.active .menu-link {
+        left: 150px;
+    }
+/*
+The content `<div>` is where all your content goes.
+*/
+
+#main {
+    /*min-height: 100%;
+    margin-bottom: 150px;*/
+    min-height: calc(100vh - 150px);
+}
+
+#main i {
+    font-style: normal;
+}
+
+.content {
+    min-height: 100%;
+    margin: 0 auto;
+    padding: 0 2em;
+    max-width: 800px;
+    padding-bottom: 50px;
+    line-height: 1.6em;
+    color: #314655;
+}
+
+.content a{
+    text-decoration: none;
+    color:#41a0da;
+}
+
+.header {
+     margin: 0;
+     color: #333;
+     text-align: center;
+     padding: 2.5em 2em 0;
+     border-bottom: 1px solid #eee;
+ }
+    .header h1 {
+        margin: 0.2em 0;
+        font-size: 3em;
+        font-weight: 300;
+    }
+     .header h2 {
+        font-weight: 300;
+        color: #ccc;
+        padding: 0;
+        margin-top: 0;
+    }
+
+.content-subhead {
+    margin: 50px 0 20px 0;
+    font-weight: 300;
+    color: #888;
+}
+
+
+
+#panel {
+    height: 150px;
+    /*margin-top: -150px;*/
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing:border-box;
+    color: #41a0da;
+    text-align: center !important;
+    padding: 1em 2em 0;
+    border-bottom: 1px solid #eee;
+
+
+ }
+
+
+#panel .panel-a a,#panel p{
+    margin: 1em 1em;
+    color: #888;
+    text-decoration: none;
+ }
+
+
+#panel :first-line{
+    margin-top: 0;
+    padding-top: 20px; 
+ }
+
+#panel :last-child{
+    margin-bottom: 0;
+    padding-bottom: 10px;
+ }
+
+/*
+The `#menu` `<div>` is the parent `<div>` that contains the `.pure-menu` that
+appears on the left side of the page.
+*/
+
+#menu {
+    margin-left: -150px; /* "#menu" width */
+    width: 150px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1000; /* so the menu or its navicon stays above all content */
+    background: #314655;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+    /*
+    All anchors inside the menu should be styled like this.
+    */
+    #menu a {
+        color: #999;
+        border: none;
+        padding: 0.6em 0 0.6em 0.6em;
+    }
+
+    /*
+    Remove all background/borders, since we are applying them to #menu.
+    */
+     #menu .pure-menu,
+     #menu .pure-menu ul {
+        border: none;
+        background: transparent;
+    }
+
+    /*
+    Add that light border to separate items into groups.
+    */
+/*    #menu .pure-menu ul,
+    #menu .pure-menu .menu-item-divided {
+        border-top: 1px solid #333;
+    }*/
+        /*
+        Change color of the anchor links on hover/focus.
+        */
+        #menu .pure-menu li a:hover,
+        #menu .pure-menu li a:focus {
+            background: #333;
+        }
+
+    /*
+    This styles the selected menu item `<li>`.
+    */
+    #menu .pure-menu-selected,
+    #menu .pure-menu-heading {
+        background: #1f8dd6;
+    }
+        /*
+        This styles a link within a selected menu item `<li>`.
+        */
+        #menu .pure-menu-selected a {
+            color: #fff;
+            font-size: 0;
+        }
+
+    /*
+    This styles the menu heading.
+    */
+    #menu .pure-menu-heading {
+        color: #fff;
+        background: #000;
+        margin: 0;
+        padding: 0;
+    }
+
+.pure-menu-heading {
+        font-size: 0;
+}
+
+/* -- Dynamic Button For Responsive Menu -------------------------------------*/
+
+/*
+The button to open/close the Menu is custom-made and not part of Pure. Here's
+how it works:
+*/
+
+/*
+`.menu-link` represents the responsive menu toggle that shows/hides on
+small screens.
+*/
+.menu-link {
+    position: fixed;
+    display: block; /* show this only on small screens */
+    top: 0;
+    left: 0; /* "#menu width" */
+    background: #000;
+    background: rgba(0,0,0,0.7);
+    font-size: 10px; /* change this value to increase/decrease button size */
+    z-index: 10;
+    width: 2em;
+    height: auto;
+    padding: 2.1em 1.6em;
+}
+
+    .menu-link:hover,
+    .menu-link:focus {
+        background: #000;
+    }
+
+    .menu-link span {
+        position: relative;
+        display: block;
+    }
+
+    .menu-link span,
+    .menu-link span:before,
+    .menu-link span:after {
+        background-color: #fff;
+        width: 100%;
+        height: 0.2em;
+    }
+
+        .menu-link span:before,
+        .menu-link span:after {
+            position: absolute;
+            margin-top: -0.6em;
+            content: " ";
+        }
+
+        .menu-link span:after {
+            margin-top: 0.6em;
+        }
+
+
+
+/* -- Responsive Styles (Media Queries) ------------------------------------- */
+
+/*
+Hides the menu at `48em`, but modify this based on your app's needs.
+*/
+@media (min-width: 48em) {
+
+    .header,
+    .content {
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+
+    #layout {
+        padding-left: 150px; /* left col width "#menu" */
+        left: 0;
+    }
+    #menu {
+        left: 150px;
+    }
+
+    .menu-link {
+        position: fixed;
+        left: 150px;
+        display: none;
+    }
+
+    #layout.active .menu-link {
+        left: 150px;
+    }
+}
+
+@media (max-width: 48em) {
+    /* Only apply this when the window is small. Otherwise, the following
+    case results in extra padding on the left:
+        * Make the window small.
+        * Tap the menu to trigger the active state.
+        * Make the window large again.
+    */
+    #layout.active {
+        position: relative;
+        left: 150px;
+    }
+}
+
+
+.pure-menu img{
+    height: 150px;
+    width: 150px;
+}
+
+
+
+.panel-icon-button {
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+    display:inline-block;
+    width:35px;
+    height:35px;
+    border-radius:100%;
+    background:#f7f7f7;
+    line-height:35px;
+    color:#b3b15f;
+    text-decoration:none;
+    font-size:18px;
+    text-align:center;
+    border:1px solid #ccc;
+    border-bottom-color:#bbb;
+    background-origin:border-box;
+    background-image:-webkit-linear-gradient(top,#fff,#eee);
+    background-image:linear-gradient(to bottom,#fff,#eee);
+    text-shadow:0 1px 0 #fff
+}
+
+.panel-icon-button:focus,.panel-icon-button:hover {
+    background-color:#ebebeb;
+    color:#666;
+    outline:0
+}
+
+
+.content-subhead a{
+    text-decoration: none;
+    color: #888;
+    font-weight: normal;
+}
+
+
+
+.comment-article-header {
+    margin-bottom:15px;
+    padding:10px;
+    border:1px solid #ddd;
+    border-radius:4px;
+    background:#b3b15f;
+}
+.comment-article-header:before,.comment-article-header:after {
+    content:" ";
+    display:table
+}
+.comment-article-header:after {
+    clear:both
+}
+.comment-article-avatar {
+    margin-right:15px;
+    float:left
+}
+.comment-article-title {
+    margin:5px 0 0;
+    font-size:16px;
+    line-height:22px
+}
+.comment-article-meta {
+    margin:2px 0 0;
+    font-size:11px;
+    line-height:16px;
+    color:#999
+}
+.comment-article-body {
+    padding-left:10px;
+    padding-right:10px
+}
+.comment-article-body>:last-child {
+    margin-bottom:0
+}
+.comment-article-list {
+    padding:0;
+    list-style:none
+}
+.comment-article-list .comment-article+ul {
+    margin:25px 0 0;
+    list-style:none
+}
+.comment-article-list>li:nth-child(n+2),.comment-article-list .comment-article+ul>li:nth-child(n+2) {
+    margin-top:25px
+}
+@media (min-width:768px) {
+    .comment-article-list .comment-article+ul {
+    padding-left:100px
+}
+}.comment-article-primary .comment-article-header {
+    border-color:rgba(45,112,145,.3);
+    background-color:#ebf7fd;
+    color:#2d7091;
+    text-shadow:0 1px 0 #fff
+}
+
+
+
+
+
+
+.article-divider {
+    border-style:dashed;
+    color:#314655;
+
+}
+
+.article-meta, .comment-article-meta {
+    color: #999;
+    font-size: 90%;
+    margin: 0;
+
+}
+
+.article h2{
+    margin: 0.1em 0;
+
+}
+
+.button-activated,.button-unactivated {
+    color: white !important;
+    font-weight:bold;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.button-activated {
+    background: #314655;
+}
+
+.button-unactivated {
+    background: #41a0da;
+}
+
+.button-create {
+    margin: 2em 0;
+}
+
+
+
+
+
+
+
+.uk-pagination {
+    padding:0;
+    list-style:none;
+    text-align:center;
+
+}
+.uk-pagination:before,.uk-pagination:after {
+    content:" ";
+    display:table
+}
+.uk-pagination:after {
+    clear:both
+}
+.uk-pagination>li {
+    display:inline-block;
+    font-size:1rem;
+    vertical-align:top
+}
+.uk-pagination>li:nth-child(n+2) {
+    margin-left:5px
+}
+.uk-pagination>li>a,.uk-pagination>li>span {
+    display:inline-block;
+    min-width:16px;
+    padding:3px 5px;
+    line-height:20px;
+    text-decoration:none;
+    -moz-box-sizing:content-box;
+    box-sizing:content-box;
+    text-align:center;
+    border-radius:4px
+}
+.uk-pagination>li>a {
+    background:#f7f7f7;
+    color:#444;
+    border:1px solid rgba(0,0,0,.2);
+    border-bottom-color:rgba(0,0,0,.3);
+    background-origin:border-box;
+    background-image:-webkit-linear-gradient(top,#fff,#eee);
+    background-image:linear-gradient(to bottom,#fff,#eee);
+    text-shadow:0 1px 0 #fff
+}
+.uk-pagination>li>a:hover,.uk-pagination>li>a:focus {
+    background-color:#fafafa;
+    color:#444;
+    outline:0;
+    background-image:none
+}
+.uk-pagination>li>a:active {
+    background-color:#f5f5f5;
+    color:#444;
+    border-color:rgba(0,0,0,.2);
+    border-top-color:rgba(0,0,0,.3);
+    background-image:none;
+    box-shadow:inset 0 2px 4px rgba(0,0,0,.1)
+}
+.uk-pagination>.uk-active>span {
+    background:#009dd8;
+    color:#fff;
+    border:1px solid rgba(0,0,0,.2);
+    border-bottom-color:rgba(0,0,0,.4);
+    background-origin:border-box;
+    background-image:-webkit-linear-gradient(top,#00b4f5,#008dc5);
+    background-image:linear-gradient(to bottom,#00b4f5,#008dc5);
+    text-shadow:0 -1px 0 rgba(0,0,0,.2)
+}
+.uk-pagination>.uk-disabled>span {
+    background-color:#fafafa;
+    color:#999;
+    border:1px solid rgba(0,0,0,.2);
+    text-shadow:0 1px 0 #fff
+}
+.uk-pagination-previous {
+    float:left
+}
+.uk-pagination-next {
+    float:right
+}
+.uk-pagination-left {
+    text-align:left
+}
+.uk-pagination-right {
+    text-align:right
+}
+
+
+
+
+.uk-alert {
+    position:relative;
+    margin-bottom:20px;
+    padding:15px 29px 15px 15px;
+    background:#f8f8f8;
+    color:#666
+}
+*+.uk-alert {
+    margin-top:20px
+}
+.uk-alert>:last-child {
+    margin-bottom:0
+}
+.uk-alert-close {
+    position:absolute;
+    top:20px;
+    right:15px;
+    color:inherit;
+    opacity:.4
+}
+.uk-alert-close:first-child+* {
+    margin-top:0
+}
+.uk-alert-close:focus,.uk-alert-close:hover {
+    color:inherit;
+    opacity:.8
+}
+.uk-alert-primary {
+    background:#d8eafc;
+    color:#1e87f0
+}
+.uk-alert-success {
+    background:#edfbf6;
+    color:#32d296
+}
+.uk-alert-warning {
+    background:#fff6ee;
+    color:#faa05a
+}
+.uk-alert-danger {
+    background:#fef4f6;
+    color:#f0506e
+}
+.uk-alert h1,.uk-alert h2,.uk-alert h3,.uk-alert h4,.uk-alert h5,.uk-alert h6 {
+    color:inherit
+}
+.uk-alert a:not([class]) {
+    color:inherit;
+    text-decoration:underline
+}
+.uk-alert a:not([class]):hover {
+    color:inherit;
+    text-decoration:underline
+}
+
+.uk-hidden,[hidden] {
+    display:none!important
+}

@@ -1,0 +1,18 @@
+{% extends '__base__.html' %}
+
+{% block title %}BLog{% endblock %}
+
+
+{% block content %}
+
+        {% for blog in blogs %}
+            <article class="article fa">
+                <h2><a href="/blog/{{ blog.id }}">{{ blog.name }}</a></h2>
+                <p class="article-meta">发表于{{ blog.created_at|datetime }}</p>
+                <p>{{ blog.summary }}</p>
+                <p><a href="/blog/{{ blog.id }}">继续阅读 <i class="fa-angle-double-right"></i></a></p>
+            </article>
+            <hr class="article-divider">
+        {% endfor %}
+
+{% endblock %}
